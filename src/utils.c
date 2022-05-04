@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int long milli(void)
+long int  milli(void)
 {
 	int long c_time;
 	struct timeval t;

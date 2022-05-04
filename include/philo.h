@@ -15,12 +15,14 @@ typedef struct s_args
 	int	time_to_eat;
 	int time_to_sleep;
 	int	num_otepmeat;
+	pthread_mutex_t mutex;
 } t_args;
 
 typedef struct s_state_philo
 {
 	int			id;
 	pthread_t	thread_id;
+	t_args		*args;
 	long int	born;
 	long int	take_fork;
 	long int	is_eating;

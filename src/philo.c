@@ -23,6 +23,7 @@ t_args start_args(char **argv)
 	i = 1;
 	j = 0;
 	a.fork = malloc(sizeof(int) * ft_atoi(argv[1]));
+	//x = &a.fork[0];
 	while(j < ft_atoi(argv[1]))
 	{
 		a.fork[j] = j + 1;
@@ -32,7 +33,7 @@ t_args start_args(char **argv)
 	{
 		if (i == 1)
 			a.phi = ft_atoi(argv[i]);
-		if (i == 2)
+		else if (i == 2)
 			a.time_to_die = ft_atoi(argv[i]);
 		else if (i == 3)
 			a.time_to_eat = ft_atoi(argv[i]);
@@ -42,7 +43,6 @@ t_args start_args(char **argv)
 			a.num_otepmeat = ft_atoi(argv[i]);
 		i++;
 	}
-	printf("phi No = %d\n", a.phi);
 	return (a);
 }
 
