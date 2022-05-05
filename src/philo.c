@@ -14,36 +14,27 @@ int ft_atoi(char *str)
 	return (num);
 }
 
-t_args start_args(char **argv)
+void start_args(char **argv, t_args *a)
 {
-	t_args a;
-	int	j;
+	//t_args a;
 	int i;
 
 	i = 1;
-	j = 0;
-	a.fork = malloc(sizeof(int) * ft_atoi(argv[1]));
-	//x = &a.fork[0];
-	while(j < ft_atoi(argv[1]))
-	{
-		a.fork[j] = j + 1;
-		j++;
-	}
 	while (argv[i])
 	{
 		if (i == 1)
-			a.phi = ft_atoi(argv[i]);
+			a->phi = ft_atoi(argv[1]);
 		else if (i == 2)
-			a.time_to_die = ft_atoi(argv[i]);
+			a->time_to_die = ft_atoi(argv[i]);
 		else if (i == 3)
-			a.time_to_eat = ft_atoi(argv[i]);
+			a->time_to_eat = ft_atoi(argv[i]);
 		else if (i == 4 )
-			a.time_to_sleep = ft_atoi(argv[i]);
+			a->time_to_sleep = ft_atoi(argv[i]);
 		else if (i == 5)
-			a.num_otepmeat = ft_atoi(argv[i]);
+			a->num_otepmeat = ft_atoi(argv[i]);
 		i++;
 	}
-	return (a);
+	//return (a);
 }
 
 int main(int argc, char **argv)
@@ -52,7 +43,8 @@ int main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
-		a = start_args(argv);
+		start_args(argv, &a);
+		//start_mutex(&a);
 		start_philos(&a);
 	}
 	else
