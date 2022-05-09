@@ -2,7 +2,7 @@
 NAME	=	philo
 SRC_DIR	=	src/
 CC		=	gcc
-CFLAGS	=	-Werror -Wall -Wextra -I include/
+CFLAGS	=	-g -Werror -Wall -Wextra -I include/
 RM		= 	rm -f
 
 #Sources Files
@@ -15,10 +15,10 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 			$(CC) $(OBJ) -o $(NAME)
 
-.c.o :	
+.c.o :
 			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-clean :	
+clean :
 			$(RM) $(OBJ)
 
 

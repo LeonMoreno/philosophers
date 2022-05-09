@@ -1,50 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/09 11:10:36 by lmoreno           #+#    #+#             */
+/*   Updated: 2022/05/09 13:30:29 by lmoreno          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int ft_atoi(char *str)
+static	int	ft_atoi(char *str)
 {
 	int	num;
 
 	num = 0;
-
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		++str;
+	if (*str == '-')
+		return (-1);
+	if (*str == '+')
+		++str;
 	while (*str)
 	{
-		num = num * 10 + (*str - '0');
+		if (*str >= '0' && *str <= '9')
+			num = num * 10 + (*str - '0');
+		else
+			return (-1);
 		str++;
 	}
 	return (num);
 }
 
-void start_args(char **argv, t_args *a)
+static	int	start_args(int argc, char **argv, t_args *a)
 {
-	//t_args a;
-	int i;
-
-	i = 1;
-	while (argv[i])
-	{
-		if (i == 1)
-			a->phi = ft_atoi(argv[1]);
-		else if (i == 2)
-			a->time_to_die = ft_atoi(argv[i]);
-		else if (i == 3)
-			a->time_to_eat = ft_atoi(argv[i]);
-		else if (i == 4 )
-			a->time_to_sleep = ft_atoi(argv[i]);
-		else if (i == 5)
-			a->num_otepmeat = ft_atoi(argv[i]);
-		i++;
-	}
-	//return (a);
+	a->phi = ft_atoi(argv[1]);
+	a->time_to_die = ft_atoi(argv[2]);
+	a->time_to_eat = ft_atoi(argv[3]);
+	a->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		a->nx_eat = ft_atoi(argv[5]);
+	else
+		a->nx_eat = 0;
+	a->died = 0;
+	if (a->phi < 2 || a->time_to_die == -1 || a->time_to_eat == -1
+		|| a->time_to_sleep == -1 || a->nx_eat == -1)
+		return (0);
+	printf ("nx_eat = %d\n", a->nx_eat);
+	return (1);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_args a;
+	t_args	a;
 
 	if (argc == 5 || argc == 6)
 	{
-		start_args(argv, &a);
-		//start_mutex(&a);
+		if (!(start_args(argc, argv, &a)))
+		{
+			printf("Invalid No ARGS\n");
+			return (1);
+		}
 		start_philos(&a);
 	}
 	else
