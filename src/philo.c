@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:10:36 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/09 13:30:29 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/10 15:54:16 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,9 @@ static	int	start_args(int argc, char **argv, t_args *a)
 	else
 		a->nx_eat = 0;
 	a->died = 0;
-	if (a->phi < 2 || a->time_to_die == -1 || a->time_to_eat == -1
+	if (a->phi < 1 || a->time_to_die == -1 || a->time_to_eat == -1
 		|| a->time_to_sleep == -1 || a->nx_eat == -1)
 		return (0);
-	printf ("nx_eat = %d\n", a->nx_eat);
 	return (1);
 }
 

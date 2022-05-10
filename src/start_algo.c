@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:59:56 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/09 13:29:46 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/09 15:47:26 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static	void	ft_philo_eat(t_state_philo *p,
 	pthread_mutex_t *f_r, pthread_mutex_t *f_l)
 {
 	pthread_mutex_lock(f_l);
-	print_msg(p->args, p->id, milli() - p->born, "Has taken a Tenedor");
+	print_msg(p->args, p->id, milli() - p->born, "Has taken a fork");
 	pthread_mutex_lock(f_r);
-	print_msg(p->args, p->id, milli() - p->born, "Has taken a Tenedor");
+	print_msg(p->args, p->id, milli() - p->born, "Has taken a fork");
 	p->current = milli();
 	p->is_eating = milli();
 	print_msg(p->args, p->id, milli() - p->born, "is eating");
@@ -118,4 +118,5 @@ void	start_philos(t_args *args)
 			return ;
 	}
 	end_philos(p);
+	free_all(p);
 }

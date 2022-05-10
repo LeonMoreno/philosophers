@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:31:07 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/09 13:34:38 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/09 15:10:31 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void	*ft_pthread(void *arg);
 long	int	milli(void);
 int		check_live(t_state_philo *t);
 void	print_msg(t_args *a, int id, long current, char *s);
+void	free_all(t_state_philo *p);
 #endif

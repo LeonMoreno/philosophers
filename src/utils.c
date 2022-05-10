@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:22:58 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/09 13:08:01 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/09 15:11:23 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,10 @@ void	print_msg(t_args *a, int id, long current, char *s)
 	pthread_mutex_lock(&a->msg);
 	printf("%ld %d %s\n", current, id, s);
 	pthread_mutex_unlock(&a->msg);
+}
+
+void	free_all(t_state_philo *p)
+{
+	free (p->args->mutex);
+	free (p);
 }
