@@ -18,7 +18,6 @@ node_modules
 
 # Ejecutables .out
 *.out
-philo
 
 #Temp Files
 *.swp
