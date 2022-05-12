@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:22:58 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 12:46:10 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/12 15:14:25 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_live(t_state_philo *t)
 {
 	int	i;
 
-	while (t->args->died == 0 && t->args->nx_eat != 0)
+	while (t->args->died == 0)
 	{
 		i = 0;
 		while (i < t->args->phi)
