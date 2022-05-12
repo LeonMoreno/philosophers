@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:59:56 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 11:52:30 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/09 15:47:26 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,11 @@ void	start_philos(t_args *args)
 		pthread_create(&p[i].thread_id, NULL, ft_pthread, &p[i]);
 		i++;
 	}
-//	if (args->nx_eat == 0)
-//	{
+	if (args->nx_eat == 0)
+	{
 		if (!check_live(p))
 			return ;
-//	}
+	}
 	end_philos(p);
 	free_all(p);
 }
