@@ -1,5 +1,5 @@
-#Variable
-NAME	=	philo
+#Variabl
+NAME	=	philo_bonus
 SRC_DIR	=	src/
 CC		=	gcc
 CFLAGS	=	-g -Werror -Wall -Wextra -I include/
