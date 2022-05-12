@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:22:58 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 15:14:25 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/12 15:22:27 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	check_live(t_state_philo *t)
 {
 	int	i;
 
-	while (t->args->died == 0)
+	while (t->args->died == 0 && !t->args->brek)
 	{
 		i = 0;
-		while (i < t->args->phi)
+		while (i < t->args->phi && !t->args->brek)
 		{
 			pthread_mutex_lock(&t->args->check_eat);
 			if ((milli() - t[i].is_eating) > t->args->time_to_die)

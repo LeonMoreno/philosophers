@@ -6,7 +6,7 @@
 /*   By: lmoreno <marvin@42quebec.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 18:51:13 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/11 19:34:41 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/12 16:18:55 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void start_philo(t_philo *p)
 	while ((milli() - current) < 200)
 		eat++;
 	sem_post(p->argu->forks);
-	//sem_post(p->argu->forks);
+	sem_post(p->argu->forks);
 	printf("Soy el Hijo No %d EAT = %d\n", p->id, eat);	
 	sem_close(p->argu->forks);
 }

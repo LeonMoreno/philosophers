@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:31:07 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 15:13:48 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/12 16:24:44 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_args
 	int				time_to_sleep;
 	int				nx_eat;
 	int				died;
+	int				brek;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	msg;
 	pthread_mutex_t	check_eat;
@@ -34,17 +35,19 @@ typedef struct s_args
 
 typedef struct s_state_philo
 {
-	int			id;
-	pthread_t	thread_id;
-	t_args		*args;
-	long int	born;
-	long int	take_fork;
-	long int	is_eating;
-	long int	is_sleeping;
-	long int	is_thinking;
-	int			eat;
-	int			xnum_eat;
-	long int	current;
+	int				id;
+	pthread_t		thread_id;
+	t_args			*args;
+	long int		born;
+	long int		take_fork;
+	long int		is_eating;
+	long int		is_sleeping;
+	long int		is_thinking;
+	int				eat;
+	int				xnum_eat;
+	long int		current;
+	pthread_mutex_t	*f_r;
+	pthread_mutex_t	*f_l;
 }	t_state_philo;
 
 //FT Philosopher pthreads

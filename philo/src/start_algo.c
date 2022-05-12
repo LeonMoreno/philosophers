@@ -6,51 +6,51 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:59:56 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 15:14:55 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/12 16:33:14 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static	void	ft_philo_eat(t_state_philo *p,
-	pthread_mutex_t *f_r, pthread_mutex_t *f_l)
+static	void	ft_philo_eat(t_state_philo *p)
 {
-	pthread_mutex_lock(f_l);
+	pthread_mutex_lock(p->f_l);
 	print_msg(p->args, p->id, milli() - p->born, "Has taken a fork");
-	pthread_mutex_lock(f_r);
+	pthread_mutex_lock(p->f_r);
 	print_msg(p->args, p->id, milli() - p->born, "Has taken a fork");
 	p->current = milli();
 	p->is_eating = milli();
 	print_msg(p->args, p->id, milli() - p->born, "is eating");
 	while ((milli() - p->current) < p->args->time_to_eat)
 		p->eat++;
-	pthread_mutex_unlock(f_l);
-	pthread_mutex_unlock(f_r);
+	p->xnum_eat++;
+	pthread_mutex_unlock(p->f_l);
+	pthread_mutex_unlock(p->f_r);
 }
 
 void	*ft_pthread(void *philo)
 {
 	t_state_philo	*p;
-	pthread_mutex_t	*f_r;
-	pthread_mutex_t	*f_l;
 
 	p = ((t_state_philo *)philo);
 	p->born = milli();
 	p->eat = 0;
 	p->current = 0;
 	if (p->id == 1)
-		f_l = &p->args->mutex[p->args->phi - 1];
+		p->f_l = &p->args->mutex[p->args->phi - 1];
 	else
-		f_l = &p->args->mutex[p->id - 2];
-	f_r = &p->args->mutex[p->id - 1];
+		p->f_l = &p->args->mutex[p->id - 2];
+	p->f_r = &p->args->mutex[p->id - 1];
 	if (p->id % 2)
 		usleep(15007);
 	while (!p->args->died)
 	{
-		ft_philo_eat(philo, f_r, f_l);
-		p->xnum_eat++;
+		ft_philo_eat(philo);
 		if (p->xnum_eat == p->args->nx_eat)
+		{
+			p->args->brek = 1;
 			break ;
+		}
 		print_msg(philo, p->id, milli() - p->born, "is Sleeping");
 		usleep(p->args->time_to_sleep * 1000);
 	}
@@ -112,11 +112,8 @@ void	start_philos(t_args *args)
 		pthread_create(&p[i].thread_id, NULL, ft_pthread, &p[i]);
 		i++;
 	}
-//	if (args->nx_eat == 0)
-//	{
-		if (!check_live(p))
-			return ;
-//	}
+	if (!check_live(p))
+		return ;
 	end_philos(p);
 	free_all(p);
 }
