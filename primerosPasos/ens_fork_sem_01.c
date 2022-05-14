@@ -6,12 +6,13 @@
 /*   By: lmoreno <marvin@42quebec.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 18:51:13 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/11 18:25:09 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/14 10:57:24 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 #include <semaphore.h>
 
@@ -25,6 +26,7 @@ void ft_child(t_ens *ens)
 	sem_wait(ens->sem_1);
 	printf("Chao\n");	
 	sem_close(ens->sem_1);
+	exit(0);
 }
 
 int main(void)
@@ -38,15 +40,15 @@ int main(void)
 	pid = fork();
 	if (pid == 0)
 		ft_child(&ens);
-	else
-	{
-		sleep(1);
+	
+	
+		//sleep(1);
 		printf("Hola\n");
-		sem_post(ens.sem_1);	
+		//sem_post(ens.sem_1);	
 		sem_close(ens.sem_1);
 		sem_unlink("/sem_1");	
-	}
+	
 	waitpid(pid, &status, 0);
-	return(0);
+	return(7);
 
 }

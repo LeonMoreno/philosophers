@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:22:58 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 18:55:07 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/14 17:14:13 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,39 @@ long int	milli(void)
 	return (c_time);
 }
 
-/*int	check_live(t_state_philo *t)
+void	*check_live(void *philo)
 {
-	int	i;
+	t_state_philo *t;
 
-	while (t->args->died == 0 && !t->args->brek)
+	t = (t_state_philo *)philo;
+	t =  philo;
+	while (1)
 	{
-		i = 0;
-		while (i < t->args->phi && !t->args->brek)
+		printf("PROC %d AQui TOY\n", t->id);
+		sem_wait(t->args->check_e);	
+		if ((milli() - t->is_eating) > t->args->time_to_die)
 		{
-			pthread_mutex_lock(&t->args->check_eat);
-			if ((milli() - t[i].is_eating) > t->args->time_to_die)
-			{
-				t->args->died = 1;
-				print_msg(t->args, t[i].id, milli() - t[i].is_eating, "died");
-				return (0);
-			}
-			pthread_mutex_unlock(&t->args->check_eat);
-			i++;
+			t->args->died = 1;
+			print_msg(t->args, t->id, milli() - t->is_eating, "died");
+			return (NULL);
+		}
+		sem_post(t->args->check_e);
+		//usleep(1000);
+		if (t->args->died == 1)
+		{
+			exit (0);
 		}
 	}
-	return (1);
-} */
+
+	return (NULL);
+}
 
 void	print_msg(t_args *a, int id, long current, char *s)
 {
 //	pthread_mutex_lock(&a->msg);
+	sem_wait(a->msg);
 	printf("%ld %d %s\n", current, id, s);
+	sem_post(a->msg);
 //	pthread_mutex_unlock(&a->msg);
 }
 

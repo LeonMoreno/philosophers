@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:31:07 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 18:49:14 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/14 15:55:09 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ typedef struct s_args
 	int				brek;
 	sem_t			*forks;
 	sem_t			*msg;
-	//pthread_mutex_t	check_eat;
+	sem_t			*check_e;
 }	t_args;
 
 typedef struct s_state_philo
 {
 	int				id;
 	pid_t			proc_id;
+	pthread_t		thread_id;
 	t_args			*args;
 	long int		born;
 	long int		take_fork;
@@ -56,7 +57,7 @@ void	ft_procstart(t_state_philo *p);
 
 //FT Utils
 long	int	milli(void);
-int		check_live(t_state_philo *t);
+void	*check_live(void *philo);
 void	print_msg(t_args *a, int id, long current, char *s);
 void	free_all(t_state_philo *p);
 #endif
