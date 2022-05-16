@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:10:36 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 15:19:37 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/16 12:43:14 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,42 @@ static	int	start_args(int argc, char **argv, t_args *a)
 	return (1);
 }
 
+t_state_philo	*start_philos(t_args *args)
+{
+	int				i;
+	t_state_philo	*p;
+
+	i = 0;
+	p = malloc(sizeof(t_state_philo) * args->phi);
+	if (!p)
+		return (NULL);
+	while (i < args->phi)
+	{
+		p[i].id = i + 1;
+		p->eat = 0;
+		p->current = 0;
+		p[i].is_eating = milli();
+		p[i].args = args;
+		i++;
+	}
+	return (p);
+}
+
 int	main(int argc, char **argv)
 {
-	t_args	a;
+	t_args			a;
+	t_state_philo	*p;
 
 	if (argc == 5 || argc == 6)
 	{
 		if (!(start_args(argc, argv, &a)))
 		{
-			printf("Invalid No ARGS\n");
+			printf("Invalid ARGS\n");
 			return (1);
 		}
-		start_philos(&a);
+		p = start_philos(&a);
+		start_mutex(&a);
+		start_pthreads(p);
 	}
 	else
 		printf("Invalid No ARGS\n");

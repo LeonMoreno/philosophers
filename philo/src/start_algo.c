@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:59:56 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/16 11:46:26 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/16 12:47:37 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	*ft_pthread(void *philo)
 
 	p = ((t_state_philo *)philo);
 	p->born = milli();
-	p->eat = 0;
-	p->current = 0;
 	if (p->id == 1)
 		p->f_l = &p->args->mutex[p->args->phi - 1];
 	else
@@ -58,7 +56,7 @@ void	*ft_pthread(void *philo)
 	return (NULL);
 }
 
-static	void	start_mutex(t_args *a)
+void	start_mutex(t_args *a)
 {
 	int	i;
 
@@ -95,21 +93,13 @@ static	void	end_philos(t_state_philo *p)
 	pthread_mutex_destroy(&p->args->check_eat);
 }
 
-void	start_philos(t_args *args)
+void	start_pthreads(t_state_philo *p)
 {
 	int				i;
-	t_state_philo	*p;
 
 	i = 0;
-	p = malloc(sizeof(t_state_philo) * args->phi);
-	if (!p)
-		return ;
-	start_mutex(args);
-	while (i < args->phi)
+	while (i < p->args->phi)
 	{
-		p[i].id = i + 1;
-		p[i].is_eating = milli();
-		p[i].args = args;
 		pthread_create(&p[i].thread_id, NULL, ft_pthread, &p[i]);
 		i++;
 	}

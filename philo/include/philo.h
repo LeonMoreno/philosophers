@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:31:07 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 16:41:38 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/16 12:31:30 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ typedef struct s_state_philo
 }	t_state_philo;
 
 //FT Philosopher pthreads
-void	start_philos(t_args *a);
+t_state_philo	*start_philos(t_args *args);
+void	start_pthreads(t_state_philo *p);
 void	*ft_pthread(void *arg);
+void	start_mutex(t_args *a);
 
 //FT Utils
 long	int	milli(void);
