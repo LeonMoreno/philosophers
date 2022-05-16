@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 13:31:07 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/14 15:55:09 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/15 21:12:06 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_BONUS_H
 
 # include <unistd.h>
+# include <signal.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <stdio.h>
@@ -29,10 +30,11 @@ typedef struct s_args
 	int				time_to_sleep;
 	int				nx_eat;
 	int				died;
-	int				brek;
 	sem_t			*forks;
 	sem_t			*msg;
 	sem_t			*check_e;
+	sem_t			*check_kill;
+	sem_t			*check_nx_eat;
 }	t_args;
 
 typedef struct s_state_philo
@@ -42,10 +44,7 @@ typedef struct s_state_philo
 	pthread_t		thread_id;
 	t_args			*args;
 	long int		born;
-	long int		take_fork;
 	long int		is_eating;
-	long int		is_sleeping;
-	long int		is_thinking;
 	int				eat;
 	int				xnum_eat;
 	long int		current;
@@ -60,4 +59,6 @@ long	int	milli(void);
 void	*check_live(void *philo);
 void	print_msg(t_args *a, int id, long current, char *s);
 void	free_all(t_state_philo *p);
+void	*check_k5(void *phi);
+void	*check_k6(void *phi);
 #endif
