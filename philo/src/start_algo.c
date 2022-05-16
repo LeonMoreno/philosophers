@@ -6,7 +6,7 @@
 /*   By: lmoreno <lmoreno@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 11:59:56 by lmoreno           #+#    #+#             */
-/*   Updated: 2022/05/12 16:41:34 by lmoreno          ###   ########.fr       */
+/*   Updated: 2022/05/16 11:46:26 by lmoreno          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	*ft_pthread(void *philo)
 		}
 		print_msg(philo, p->id, milli() - p->born, "is Sleeping");
 		usleep(p->args->time_to_sleep * 1000);
+		print_msg(p->args, p->id, milli() - p->born, "is thinking");
 	}
 	return (NULL);
 }

@@ -2,7 +2,7 @@
 NAME	=	philo
 SRC_DIR	=	src/
 CC		=	gcc
-CFLAGS	=	-g -Werror -Wall -Wextra -I include/
+CFLAGS	=	-Werror -Wall -Wextra -I include/
 RM		= 	rm -f
 
 #Sources Files
